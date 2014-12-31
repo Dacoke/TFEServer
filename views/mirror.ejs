@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Mirror</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <style>
+        body        { padding-top:80px; }
+    </style>
+</head>
+<body> 
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Mirror.me</h1>
+            <p>Le texte que vous introduisez ci-dessous sera affiché sur l'écran distant</p>
+<!--             <p> -->
+<!--                 <a class="btn btn-primary btn-lg" role="button">Learn more -->
+<!--                     &raquo;</a> -->
+<!--             </p> -->
+        </div>
+    </div>
+ 
+    <div class="container">
+        <div class="row">
+			<div class="col-md-12">
+					<!-- MIRROR FORM -->
+				    <form action="/mirror" method="post">
+				        <div class="form-group">
+				            <label>Message à envoyer</label>
+				            <input type="text" class="form-control" name="message">
+				        </div>				
+				        <button type="submit" class="btn btn-warning btn-lg">Envoyer</button>
+				    </form>
+			</div>
+		</div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+	<script>
+	  var socket = io.connect('http://localhost:8080');
+	  socket.on('establishing connection', function (data) {
+	    console.log(data);
+	    socket.emit('connection established', { my: 'data' });
+	  });
+	</script>
+</body>
+</html>
