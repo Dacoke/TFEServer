@@ -35,13 +35,14 @@
 			</div>
 		</div>
     </div>
-    <script src="/socket.io/socket.io.js"></script>
+<!--     <script src="/socket.io/socket.io.js"></script> -->
 	<script>
-	  var socket = io.connect('http://localhost:8080');
-	  socket.on('establishing connection', function (data) {
-	    console.log(data);
-	    socket.emit('connection established', { my: 'data' });
-	  });
+	//only for testing pusposes TODO connect socket in server.js to raspy
+// 	  var socket = io();
+// 	  socket.on('establishing connection', function (data) {
+// 	    console.log(data);
+// 	    socket.emit('connection established', { my: 'data' });
+// 	  });
 	</script>
 </body>
 </html>
