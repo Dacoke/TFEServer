@@ -4,10 +4,11 @@
 // get all the tools we need
 var express  = require('express');
 var app      = express();
-var port     = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash    = require('connect-flash');
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -51,5 +52,6 @@ io.on('connection', function (socket) {
 });
 
 // launch ======================================================================
-server.listen(port);
-console.log('The magic happens on port ' + port);
+server.listen(port, ip_address, function(){
+  console.log("The magic happens on " + ip_address + ", port " + port);
+});
