@@ -35,14 +35,13 @@
 			</div>
 		</div>
     </div>
-<!--     <script src="/socket.io/socket.io.js"></script> -->
+    <script src="/socket.io/socket.io.js"></script>
 	<script>
-	//only for testing pusposes TODO connect socket in server.js to raspy
-// 	  var socket = io();
-// 	  socket.on('establishing connection', function (data) {
-// 	    console.log(data);
-// 	    socket.emit('connection established', { my: 'data' });
-// 	  });
+		var socket = io.connect('http://tfe.ngrok.com:8080');
+		socket.on('establishing connection', function (data) {
+		  console.log(data);
+		  socket.emit('connection established', { my: 'data' });
+		});
 	</script>
 </body>
 </html>
