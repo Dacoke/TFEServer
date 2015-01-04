@@ -43,7 +43,8 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
-//socket TODO connection to raspy
+//socket 
+io.set('origins', 'http://tfe.ngrok.com:8080');
 io.on('connection', function (socket) {
   socket.emit('establishing connection', { hello: 'world' });
   socket.on('connection established', function (data) {
