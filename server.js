@@ -44,7 +44,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 //socket 
-io.set('origins', 'http://tfe.ngrok.com:8080');
+io.set('origins', 'http://tfe.ngrok.com:8080/socket.io');
 io.on('connection', function (socket) {
   socket.emit('establishing connection', { hello: 'world' });
   socket.on('connection established', function (data) {
