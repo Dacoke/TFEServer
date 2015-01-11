@@ -37,7 +37,7 @@
     </div>
     <script src="/socket.io/socket.io.js"></script>
 	<script>
-		var socket = io.connect('http://tfe.ngrok.com:8080');
+		var socket = io.connect('http://tfe.ngrok.com:80');
 		socket.on('establishing connection', function (data) {
 		  console.log(data);
 		  socket.emit('connection established', { my: 'data' });
