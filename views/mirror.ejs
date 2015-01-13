@@ -25,23 +25,50 @@
         <div class="row">
 			<div class="col-md-12">
 					<!-- MIRROR FORM -->
-				    <form action="/mirror" method="post">
+				    <form action="/mirror" method="post" id="form_message">
 				        <div class="form-group">
 				            <label>Message à envoyer</label>
-				            <input type="text" class="form-control" name="message">
+				            <input type="text" class="form-control" name="message" id="message">
 				        </div>				
-				        <button type="submit" class="btn btn-warning btn-lg">Envoyer</button>
+				        <button type="submit" class="btn btn-warning btn-lg" id="send_message">Envoyer</button>
 				    </form>
 			</div>
 		</div>
     </div>
+    <div class="jumbotron">
+	    <div class="container">
+	        <div class="row">
+				<div class="col-md-12">
+						<section id="sent_message">
+						
+						</section>
+				</div>
+			</div>
+	    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
     <script src="/socket.io/socket.io.js"></script>
 	<script>
 		var socket = io.connect('http://tfe.ngrok.com:80');
-		socket.on('establishing connection', function (data) {
-		  console.log(data);
-		  socket.emit('connection established', { my: 'data' });
-		});
+		socket.emit('connection established', { hello: 'world' });
+		
+		// Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
+		(function($) {
+	          $(function() {
+		        $('#form_message').submit(function () {
+		            var message = $('#message').val();
+		            socket.emit('message', message); // Transmet le message aux autres
+		            insereMessage(message); // Affiche le message aussi sur notre page
+		            $('#message').val('').focus(); // Vide la zone de Chat et remet le focus dessus
+		            return false; // Permet de bloquer l'envoi "classique" du formulaire
+		        });
+		     	// Ajoute un message dans la page
+		        function insereMessage(message) {
+		            $('#sent_message').prepend('<p><strong>' + message + '</strong></p>');
+		        }
+	          });
+         })(jQuery);
+        
 	</script>
 </body>
 </html>

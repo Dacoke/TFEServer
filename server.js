@@ -48,14 +48,6 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
-//socket 
-io.on('connection', function (socket) {
-  socket.emit('establishing connection', { hello: 'world' });
-  socket.on('connection established', function (data) {
-    console.log(data);
-  });
-});
-
 // launch ======================================================================
 server.listen(port, ip_address, function(){
   console.log("The magic happens on " + ip_address + ", port " + port);
