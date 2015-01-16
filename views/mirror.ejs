@@ -17,10 +17,6 @@
 	        <a href="/profile" class="btn btn-default btn-sm">Profile</a>
             <h1>Mirror.me</h1>
             <p>Le texte que vous introduisez ci-dessous sera affiché sur l'écran distant</p>
-<!--             <p> -->
-<!--                 <a class="btn btn-primary btn-lg" role="button">Learn more -->
-<!--                     &raquo;</a> -->
-<!--             </p> -->
         </div>
     </div>
  
@@ -52,20 +48,21 @@
     <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
     <script src="/socket.io/socket.io.js"></script>
 	<script>
+		//connect to raspberry
 		var mirrorSocket = io.connect('http://tfe.ngrok.com:80');
 		mirrorSocket.emit('connection established', { hello: 'world' });
 		
-		// Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
-		(function($) {
+		// When whe send the form, we transmit the message to the raspberry and we show it
+		(function($) { //this fixes "$ undefined" bug buy passing jquery as a parameter
 	          $(function() {
 		        $('#form_message').submit(function () {
 		            var message = $('#message').val();
-		            mirrorSocket.emit('message', message); // Transmet le message aux autres
-		            insereMessage(message); // Affiche le message aussi sur notre page
-		            $('#message').val('').focus(); // Vide la zone de Chat et remet le focus dessus
-		            return false; // Permet de bloquer l'envoi "classique" du formulaire
+		            mirrorSocket.emit('message', message); // Send message to raspberry
+		            insereMessage(message); // Shows message in this page
+		            $('#message').val('').focus(); // Empties input an sets focus on it
+		            return false; // bloc the classical form 
 		        });
-		     	// Ajoute un message dans la page
+		     	// Shows the message in this page
 		        function insereMessage(message) {
 		            $('#sent_message').prepend('<p><strong>' + message + '</strong></p>');
 		        }
