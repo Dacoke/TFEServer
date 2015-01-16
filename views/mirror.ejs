@@ -4,6 +4,7 @@
     <title>Mirror</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body        { padding-top:80px; }
     </style>
@@ -49,15 +50,15 @@
     <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
     <script src="/socket.io/socket.io.js"></script>
 	<script>
-		var socket = io.connect('http://tfe.ngrok.com:80');
-		socket.emit('connection established', { hello: 'world' });
+		var mirrorSocket = io.connect('http://tfe.ngrok.com:80');
+		mirrorSocket.emit('connection established', { hello: 'world' });
 		
 		// Lorsqu'on envoie le formulaire, on transmet le message et on l'affiche sur la page
 		(function($) {
 	          $(function() {
 		        $('#form_message').submit(function () {
 		            var message = $('#message').val();
-		            socket.emit('message', message); // Transmet le message aux autres
+		            mirrorSocket.emit('message', message); // Transmet le message aux autres
 		            insereMessage(message); // Affiche le message aussi sur notre page
 		            $('#message').val('').focus(); // Vide la zone de Chat et remet le focus dessus
 		            return false; // Permet de bloquer l'envoi "classique" du formulaire
